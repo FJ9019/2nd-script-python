@@ -24,6 +24,7 @@ for i in range(mot_len):
 
 
 while loop:
+    
     print(mystere)
     mot_utilisateur = input(f"Quel est le mot caché !")
     
@@ -36,7 +37,11 @@ while loop:
             mystere = ""
             for i in range(mot_len):
                 if mot_utilisateur[i] == mot[i]:
-                    mystere += mot[i]
+                    if i>0:
+                        if mot[i-1]==mot_utilisateur[i-1]:
+                            mystere += mot[i]
+                        else:
+                            mystere += mystere_backup[i]    
                 else:
                     mystere += mystere_backup[i]    
             print(f"Désolé le mot entré ne correspond pas !")
