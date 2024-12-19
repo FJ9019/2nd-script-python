@@ -23,13 +23,13 @@ def check_it(mystere, mot, user_try):
         msg = f"Déslé vous devez entré un mot contenant {len(mot)} caractères !"
         return status, msg, mystere
     
-    if mot_utilisateur != mot:
+    if user_try != mot:
         mystere_backup = mystere
         mystere = ""
-        for i in range(mot_len):
-            if mot_utilisateur[i] == mot[i]:
+        for i in range(len(mot)):
+            if user_try[i] == mot[i]:
                 if i>0:
-                    if mot[i-1] ==mot_utilisateur[i-1]:
+                    if mot[i-1] ==user_try[i-1]:
                         mystere += mot[i]
                     else:
                         mystere += mystere_backup[i]
@@ -37,6 +37,20 @@ def check_it(mystere, mot, user_try):
                     mystere += mystere_backup[i]
             else:
                 mystere += mystere_backup[i]
-        print(f"Désolé le mot entré ne correspond pas !")                            
+        msg = f"Désolé le mot entré ne correspond pas !"
+        return status, msg, mystere
     
-print(generate_mystery_word(["secret", "cacher", "mystere"]))
+    msg = f"Félicitation vous avez trouvé le mot caché : {mot}"
+    status = True
+    return status, msg, mystere
+
+def play(dictionnaire=["test", "mystere"]):
+    mot, mystere = generate_mystery_word(dictionnaire)
+    loop = True
+    
+mot, mystere = generate_mystery_word(["secret", "cacher", "mystere"])
+
+print(mystere)
+
+mot_ = input("entrez données : ")
+print(check_it(mystere, mot, mot_))
