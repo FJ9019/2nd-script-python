@@ -46,11 +46,21 @@ def check_it(mystere, mot, user_try):
 
 def play(dictionnaire=["test", "mystere"]):
     mot, mystere = generate_mystery_word(dictionnaire)
-    loop = True
+    loop = False
     
-mot, mystere = generate_mystery_word(["secret", "cacher", "mystere"])
+    while not loop: 
+        print(mystere)
+        user_try = input(f"Quel est le mot caché ?")
+        loop, msg, mystere = check_it(mystere, mot, user_try)
+        print(msg)
+    
+dictionnaire = [
+    "test",
+    "vie",
+    "aimer",
+    "secret",
+    "mystere",
+    "cacher"
+]
 
-print(mystere)
-
-mot_ = input("entrez données : ")
-print(check_it(mystere, mot, mot_))
+play(dictionnaire)
